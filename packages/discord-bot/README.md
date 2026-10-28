@@ -2,6 +2,8 @@
 
 Bot Node.js en JavaScript avec discord.js `14.27.x`, commandes slash modulaires et support des composants Discord classiques et Components V2.
 
+Le serveur Express répond `Hello World!` sur `GET /`. Il utilise le port `PORT` fourni par Replit, ou le port `3000` par défaut.
+
 ## Configuration
 
 1. Dans le portail développeur Discord, crée une application puis ajoute un bot.
