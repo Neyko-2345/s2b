@@ -1,0 +1,20 @@
+{
+  "name": "@workspace/discord-bot",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch --env-file-if-exists=.env --import tsx ./src/index.ts",
+    "start": "node --env-file-if-exists=.env --import tsx ./src/index.ts",
+    "deploy-commands": "node --env-file-if-exists=.env --import tsx ./src/deploy-commands.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "discord.js": "^14.27.0"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "~5.9.3"
+  }
+}
