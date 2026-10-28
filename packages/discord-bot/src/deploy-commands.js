@@ -2,7 +2,6 @@ import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 import { REST, Routes } from "discord.js";
 import { loadModules } from "./lib/load-modules.js";
-import type { SlashCommand } from "./types.js";
 
 const token = process.env.DISCORD_TOKEN;
 const clientId = process.env.DISCORD_CLIENT_ID;
@@ -15,9 +14,7 @@ if (!token || !clientId) {
 }
 
 const sourceDirectory = fileURLToPath(new URL(".", import.meta.url));
-const commands = await loadModules<SlashCommand>(
-  join(sourceDirectory, "commands"),
-);
+const commands = await loadModules(join(sourceDirectory, "commands"));
 const payload = commands.map((command) => command.data.toJSON());
 const rest = new REST({ version: "10" }).setToken(token);
 const route = guildId

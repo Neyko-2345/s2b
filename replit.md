@@ -1,6 +1,6 @@
 # Bot Discord
 
-Base extensible de bot Discord en TypeScript, construite sur discord.js v14 avec commandes slash, événements et composants interactifs.
+Base extensible de bot Discord en Node.js et JavaScript, construite sur discord.js v14 avec commandes slash, événements et composants interactifs.
 
 ## Run & Operate
 
@@ -36,6 +36,7 @@ Base extensible de bot Discord en TypeScript, construite sur discord.js v14 avec
 
 - Discord bot runs as its own workspace package and does not depend on the API server.
 - Bot credentials are read from environment variables; never commit a real `.env` file or token.
+- Bot source uses native Node.js JavaScript modules, not TypeScript.
 - Slash commands are deployed separately from the bot process.
 
 ## Product

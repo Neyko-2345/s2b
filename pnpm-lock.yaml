@@ -453,16 +453,6 @@ importers:
       discord.js:
         specifier: ^14.27.0
         version: 14.27.0
-    devDependencies:
-      '@types/node':
-        specifier: 'catalog:'
-        version: 25.9.9
-      tsx:
-        specifier: 'catalog:'
-        version: 4.23.15
-      typescript:
-        specifier: ~5.9.3
-        version: 5.9.3
 
   scripts:
     devDependencies:

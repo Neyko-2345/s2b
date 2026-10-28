@@ -1,7 +1,6 @@
 import { MessageFlags } from "discord.js";
-import type { ComponentHandler } from "../../types.js";
 
-const demoButtonHandler: ComponentHandler = {
+export default {
   customId: "components-demo:button",
   async execute(interaction) {
     await interaction.reply({
@@ -10,5 +9,3 @@ const demoButtonHandler: ComponentHandler = {
     });
   },
 };
-
-export default demoButtonHandler;

@@ -1,12 +1,9 @@
 import { Events } from "discord.js";
-import type { Client } from "discord.js";
 
-const readyEvent = {
+export default {
   name: Events.ClientReady,
   once: true,
-  execute(client: Client<true>) {
+  execute(client) {
     console.info(`Bot connecté en tant que ${client.user.tag}.`);
   },
 };
-
-export default readyEvent;

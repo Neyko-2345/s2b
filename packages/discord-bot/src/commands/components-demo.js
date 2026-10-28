@@ -8,9 +8,8 @@ import {
   StringSelectMenuBuilder,
   TextDisplayBuilder,
 } from "discord.js";
-import type { SlashCommand } from "../types.js";
 
-const componentsDemoCommand: SlashCommand = {
+export default {
   data: new SlashCommandBuilder()
     .setName("components-demo")
     .setDescription("Affiche un exemple de composants Discord interactifs."),
@@ -24,7 +23,7 @@ const componentsDemoCommand: SlashCommand = {
         ),
       )
       .addActionRowComponents(
-        new ActionRowBuilder<ButtonBuilder>().addComponents(
+        new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setCustomId("components-demo:button")
             .setLabel("Tester le bouton")
@@ -36,7 +35,7 @@ const componentsDemoCommand: SlashCommand = {
         ),
       )
       .addActionRowComponents(
-        new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
+        new ActionRowBuilder().addComponents(
           new StringSelectMenuBuilder()
             .setCustomId("components-demo:select")
             .setPlaceholder("Choisir une option")
@@ -53,5 +52,3 @@ const componentsDemoCommand: SlashCommand = {
     });
   },
 };
-
-export default componentsDemoCommand;

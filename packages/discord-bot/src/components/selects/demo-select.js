@@ -1,7 +1,6 @@
 import { MessageFlags } from "discord.js";
-import type { ComponentHandler } from "../../types.js";
 
-const demoSelectHandler: ComponentHandler = {
+export default {
   customId: "components-demo:select",
   async execute(interaction) {
     if (!interaction.isStringSelectMenu()) return;
@@ -12,5 +11,3 @@ const demoSelectHandler: ComponentHandler = {
     });
   },
 };
-
-export default demoSelectHandler;

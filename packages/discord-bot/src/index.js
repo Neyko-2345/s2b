@@ -7,15 +7,7 @@ import {
   GatewayIntentBits,
   MessageFlags,
 } from "discord.js";
-import type { ClientEvents } from "discord.js";
 import { loadModules } from "./lib/load-modules.js";
-import type {
-  BotClient,
-  BotEvent,
-  ComponentHandler,
-  ModalHandler,
-  SlashCommand,
-} from "./types.js";
 
 const token = process.env.DISCORD_TOKEN;
 if (!token) {
@@ -27,27 +19,23 @@ if (!token) {
 const sourceDirectory = fileURLToPath(new URL(".", import.meta.url));
 const client = new Client({
   intents: [GatewayIntentBits.Guilds],
-}) as BotClient;
+});
 
-client.commands = new Collection<string, SlashCommand>();
-client.components = new Collection<string, ComponentHandler>();
-client.modals = new Collection<string, ModalHandler>();
+client.commands = new Collection();
+client.components = new Collection();
+client.modals = new Collection();
 
-const commands = await loadModules<SlashCommand>(
-  join(sourceDirectory, "commands"),
-);
-const buttons = await loadModules<ComponentHandler>(
+const commands = await loadModules(join(sourceDirectory, "commands"));
+const buttons = await loadModules(
   join(sourceDirectory, "components", "buttons"),
 );
-const selects = await loadModules<ComponentHandler>(
+const selects = await loadModules(
   join(sourceDirectory, "components", "selects"),
 );
-const modals = await loadModules<ModalHandler>(
+const modals = await loadModules(
   join(sourceDirectory, "components", "modals"),
 );
-const events = await loadModules<BotEvent>(
-  join(sourceDirectory, "events"),
-);
+const events = await loadModules(join(sourceDirectory, "events"));
 
 for (const command of commands) {
   client.commands.set(command.data.name, command);
@@ -60,17 +48,16 @@ for (const handler of modals) {
 }
 
 for (const event of events) {
-  const listener = (...args: unknown[]) => {
-    void Promise.resolve(event.execute(...args)).catch((error: unknown) => {
+  const listener = (...args) => {
+    void Promise.resolve(event.execute(...args)).catch((error) => {
       console.error(`Erreur dans l'événement ${String(event.name)} :`, error);
     });
   };
 
-  const eventName = event.name as keyof ClientEvents;
   if (event.once) {
-    client.once(eventName, listener as never);
+    client.once(event.name, listener);
   } else {
-    client.on(eventName, listener as never);
+    client.on(event.name, listener);
   }
 }
 
@@ -100,17 +87,23 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
     const errorMessage = {
       content: "Une erreur est survenue pendant le traitement.",
-      flags: MessageFlags.Ephemeral as const,
+      flags: MessageFlags.Ephemeral,
     };
 
     if (interaction.isRepliable()) {
       if (interaction.replied || interaction.deferred) {
         await interaction.followUp(errorMessage).catch((followUpError) => {
-          console.error("Impossible d'envoyer le message d'erreur :", followUpError);
+          console.error(
+            "Impossible d'envoyer le message d'erreur :",
+            followUpError,
+          );
         });
       } else {
         await interaction.reply(errorMessage).catch((replyError) => {
-          console.error("Impossible d'envoyer le message d'erreur :", replyError);
+          console.error(
+            "Impossible d'envoyer le message d'erreur :",
+            replyError,
+          );
         });
       }
     }

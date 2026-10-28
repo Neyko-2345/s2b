@@ -1,7 +1,6 @@
 import { MessageFlags } from "discord.js";
-import type { ModalHandler } from "../../types.js";
 
-const demoFormHandler: ModalHandler = {
+export default {
   customId: "components-demo:form",
   async execute(interaction) {
     const message = interaction.fields.getTextInputValue("message");
@@ -11,5 +10,3 @@ const demoFormHandler: ModalHandler = {
     });
   },
 };
-
-export default demoFormHandler;

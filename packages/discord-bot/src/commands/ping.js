@@ -1,7 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
-import type { SlashCommand } from "../types.js";
 
-const pingCommand: SlashCommand = {
+export default {
   data: new SlashCommandBuilder()
     .setName("ping")
     .setDescription("Vérifie que le bot répond."),
@@ -10,5 +9,3 @@ const pingCommand: SlashCommand = {
     await interaction.reply(`Pong ! Latence Discord : ${latency} ms.`);
   },
 };
-
-export default pingCommand;

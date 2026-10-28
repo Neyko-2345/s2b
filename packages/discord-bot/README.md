@@ -1,6 +1,6 @@
 # Base du bot Discord
 
-Bot TypeScript avec discord.js `14.27.x`, commandes slash modulaires et support des composants Discord classiques et Components V2.
+Bot Node.js en JavaScript avec discord.js `14.27.x`, commandes slash modulaires et support des composants Discord classiques et Components V2.
 
 ## Configuration
 

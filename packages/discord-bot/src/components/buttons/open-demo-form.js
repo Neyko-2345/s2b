@@ -1,14 +1,18 @@
-import { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
-import type { ComponentHandler } from "../../types.js";
+import {
+  ActionRowBuilder,
+  ModalBuilder,
+  TextInputBuilder,
+  TextInputStyle,
+} from "discord.js";
 
-const openDemoFormHandler: ComponentHandler = {
+export default {
   customId: "components-demo:open-form",
   async execute(interaction) {
     const modal = new ModalBuilder()
       .setCustomId("components-demo:form")
       .setTitle("Formulaire de démonstration")
       .addComponents(
-        new ActionRowBuilder<TextInputBuilder>().addComponents(
+        new ActionRowBuilder().addComponents(
           new TextInputBuilder()
             .setCustomId("message")
             .setLabel("Ton message")
@@ -21,5 +25,3 @@ const openDemoFormHandler: ComponentHandler = {
     await interaction.showModal(modal);
   },
 };
-
-export default openDemoFormHandler;
